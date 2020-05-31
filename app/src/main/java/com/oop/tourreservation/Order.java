@@ -1,6 +1,7 @@
 package com.oop.tourreservation;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "order")
@@ -14,6 +15,7 @@ public class Order {
     public int baby_num;
     public int total_price;
 
+    @Ignore
     public Order(int id, int user_id, int tour_id, int adult_num, int child_num, int baby_num, int total_price) {
         this.id = id;
         this.user_id = user_id;

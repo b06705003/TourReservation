@@ -1,4 +1,3 @@
-// test git
 package com.oop.tourreservation;
 
 import android.content.Context;
@@ -6,11 +5,13 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Tour.class, Order.class, User.class, TravelCode.class}, version = 1, exportSchema = false)
+@TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract TourDao tourDao();
