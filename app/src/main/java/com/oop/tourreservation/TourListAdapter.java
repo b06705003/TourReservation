@@ -57,9 +57,9 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourVi
         Tour tour = mTours.get(position);
 
         holder.tourName.setText(tour.title);
-        holder.price.setText(tour.price);
-        holder.minPeople.setText(tour.lower_bound);
-        holder.maxPeople.setText(tour.upper_bound);
+        holder.price.setText(String.valueOf(tour.price));
+        holder.minPeople.setText(String.valueOf(tour.lower_bound));
+        holder.maxPeople.setText(String.valueOf(tour.upper_bound));
         holder.startDate.setText(tour.start_date.toString());
         holder.endDate.setText(tour.end_date.toString());
     }
