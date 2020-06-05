@@ -14,7 +14,7 @@ public class AppRepository {
     private TravelCodeDao travelCodeDao;
     private UserDao userDao;
 
-    private LiveData<List<Tour>> searchedTours;
+    private List<Tour> searchedTours;
 
     public AppRepository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
@@ -24,8 +24,26 @@ public class AppRepository {
         userDao = db.userDao();
     }
 
-    public LiveData<List<Tour>> getToursByCodeAndDate(int code, Date date) {
-        searchedTours = tourDao.getToursByCodeAndDate(code, date);
+    public List<Tour> getToursByCodeAndDate(int code, Date from, Date to, String sort_method) {
+        searchedTours = tourDao.getToursByCodeAndDate(code, from, to, sort_method);
         return searchedTours;
     }
+
+    public List<Integer> getTravelCodesByString(String search_str) {
+        return travelCodeDao.getTravelCodesByString(search_str);
+    }
+
+    public List<Integer> getAllCodes() {
+        return travelCodeDao.getAllCodes();
+    }
+
+    public void insertUser(User user) {
+        userDao.insertUser(user);
+    }
+
+    public List<User> getAllUsers() {
+        return userDao.getAllUsers();
+    }
+
+
 }

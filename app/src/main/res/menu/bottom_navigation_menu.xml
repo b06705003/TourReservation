@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/page_signup"
+        android:enabled="true"
+        android:title="@string/signup_title"
+        android:icon="@drawable/signup_icon"/>
+
+    <item
+        android:id="@+id/page_search"
+        android:enabled="true"
+        android:title="@string/search_title"
+        android:icon="@drawable/search_icon"/>
+
+    <item
+        android:id="@+id/page_reservation"
+        android:enabled="true"
+        android:title="@string/reservation_title"
+        android:icon="@drawable/reservation_icon"/>
+
+    <item
+        android:id="@+id/page_modify"
+        android:enabled="true"
+        android:title="@string/modify_title"
+        android:icon="@drawable/modify_icon"/>
+
+    <item
+        android:id="@+id/page_check"
+        android:enabled="true"
+        android:title="@string/check_title"
+        android:icon="@drawable/check_icon"/>
+
+</menu>

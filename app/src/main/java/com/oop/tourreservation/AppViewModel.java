@@ -13,8 +13,8 @@ public class AppViewModel extends AndroidViewModel {
 
     private AppRepository appRepository;
 
-    private LiveData<List<Tour>> searchedTours;
-    private LiveData<Order> searchedOrder;
+    private List<Tour> searchedTours;
+    private Order searchedOrder;
 
     public AppViewModel(@NonNull Application application) {
         super(application);
@@ -22,16 +22,30 @@ public class AppViewModel extends AndroidViewModel {
     }
 
     // 1st function: search available tours by code and date
-    public LiveData<List<Tour>> getToursByCodeAndDate(int code, Date date) {
-        searchedTours = appRepository.getToursByCodeAndDate(code, date);
+    public List<Tour> getToursByCodeAndDate(int code, Date from, Date to, String sort_method) {
+        searchedTours = appRepository.getToursByCodeAndDate(code, from, to, sort_method);
         return searchedTours;
     }
 
+    public List<Integer> getTravelCodesByString(String search_str) {
+        return appRepository.getTravelCodesByString(search_str);
+    }
+
+    public List<Integer> getAllCodes() {
+        return appRepository.getAllCodes();
+    }
+
     // 4th function: search existing order by user_id and order_id
-    public LiveData<Order> getOrder() {
+    public Order getOrder() {
         // TODO: 2020/5/31
         return searchedOrder;
     }
 
+    public void insertUser(User user) {
+        appRepository.insertUser(user);
+    }
 
+    public List<User> getAllUsers() {
+        return appRepository.getAllUsers();
+    }
 }

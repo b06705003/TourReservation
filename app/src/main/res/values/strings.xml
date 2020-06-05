@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">TourReservation</string>
+    <string name="tv_destination">目的地:</string>
+    <string name="tv_start_date">可出發日期:</string>
+    <string name="et_destination">請輸入目的地</string>
+    <string name="et_from">最早出發日期</string>
+    <string name="et_to">最晚出發日期</string>
+    <string name="date_format">%1$d-%2$d-%3$d</string>
+    <string name="btn_search">搜尋</string>
+
+    <string name="signup_title">註冊</string>
+    <string name="search_title">搜尋</string>
+    <string name="reservation_title">預約</string>
+    <string name="modify_title">修改</string>
+    <string name="check_title">確認</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="username_hint">帳號</string>
+    <string name="password_hint">密碼</string>
+    <string name="realname_hint">姓名</string>
+
+    <string name="same_username">此帳號已註冊過，請更改</string>
+    <string name="signup_success">註冊成功</string>
 </resources>
