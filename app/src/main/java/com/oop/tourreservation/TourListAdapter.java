@@ -13,32 +13,45 @@ import java.util.List;
 
 public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourViewHolder> {
 
-    public class TourViewHolder extends RecyclerView.ViewHolder {
+    private List<Tour> mTours; // cached copy of words
+    private OnTourClickListener mOnTourClickListener;
+
+    public TourListAdapter(List<Tour> tours, OnTourClickListener onTourClickListener) {
+        this.mTours = tours;
+        this.mOnTourClickListener = onTourClickListener;
+    }
+
+    public class TourViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView tourName;
         public TextView price;
         public TextView minPeople;
         public TextView maxPeople;
         public TextView startDate;
         public TextView endDate;
+        OnTourClickListener onTourClickListener;
 
 
-        public TourViewHolder(@NonNull View itemView) {
+        public TourViewHolder(@NonNull View itemView, OnTourClickListener onTourClickListener) {
             super(itemView);
 
-            tourName = (TextView)itemView.findViewById(R.id.tour_name);
+            tourName = (TextView)itemView.findViewById(R.id.of_tourname);
             price = (TextView)itemView.findViewById(R.id.price);
             minPeople = (TextView)itemView.findViewById(R.id.lower_bound);
             maxPeople = (TextView)itemView.findViewById(R.id.upper_bound);
             startDate = (TextView)itemView.findViewById(R.id.start_date);
             endDate = (TextView)itemView.findViewById(R.id.end_date);
+
+            this.onTourClickListener = onTourClickListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            onTourClickListener.onTourClick(getAdapterPosition());
         }
     }
 
-    private List<Tour> mTours; // cached copy of words
 
-    public TourListAdapter(List<Tour> tours) {
-        mTours = tours;
-    }
 
     @NonNull
     @Override
@@ -49,7 +62,7 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourVi
 
         View tourView = inflater.inflate(R.layout.tour_layout, parent, false);
 
-        return new TourViewHolder(tourView);
+        return new TourViewHolder(tourView, mOnTourClickListener);
     }
 
     @Override // populating data into the item through holder
@@ -67,5 +80,9 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourVi
     @Override
     public int getItemCount() {
         return mTours.size();
+    }
+
+    public interface OnTourClickListener {
+        void onTourClick(int position);
     }
 }

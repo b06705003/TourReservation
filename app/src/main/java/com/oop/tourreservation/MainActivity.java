@@ -28,7 +28,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    // AppViewModel viewModel;
+    AppViewModel viewModel;
     // ArrayList<Tour> tours;
 
     @Override
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // viewModel = new ViewModelProvider(this).get(AppViewModel.class);
+        viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
         // get access to views
 
@@ -89,5 +89,10 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public static String dateToString(Date date) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        return format.format(date);
     }
 }

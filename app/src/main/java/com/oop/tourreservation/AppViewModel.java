@@ -36,10 +36,7 @@ public class AppViewModel extends AndroidViewModel {
     }
 
     // 4th function: search existing order by user_id and order_id
-    public Order getOrder() {
-        // TODO: 2020/5/31
-        return searchedOrder;
-    }
+    public Order getOrder(int orderId) { return appRepository.getOrder(orderId); }
 
     public void insertUser(User user) {
         appRepository.insertUser(user);
@@ -48,4 +45,16 @@ public class AppViewModel extends AndroidViewModel {
     public List<User> getAllUsers() {
         return appRepository.getAllUsers();
     }
+
+    public User getUserByUsername(String username) { return appRepository.getUserByUsername(username); }
+
+    public void insertOrder(Order order) { appRepository.insertOrder(order); }
+
+    public List<Order> getAllOrders() { return appRepository.getAllOrders(); }
+
+    void updateTour(Tour tour) { appRepository.updateTour(tour); }
+
+    public User getUser(int userId) { return appRepository.getUser(userId); }
+
+    public Tour getTour(int tourId) { return appRepository.getTour(tourId); }
 }

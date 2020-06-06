@@ -14,7 +14,7 @@
         android:layout_margin="4dp">
 
         <TextView
-            android:id="@+id/tour_name"
+            android:id="@+id/of_tourname"
             style="@style/text_view"
             android:text="馬達加斯加 猴麵包樹 夢幻生態天堂10天"
             android:textSize="20sp"
@@ -26,14 +26,14 @@
             style="@style/text_view"
             android:text="價格:"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tour_name" />
+            app:layout_constraintTop_toBottomOf="@+id/of_tourname" />
 
         <TextView
             android:id="@+id/price"
             style="@style/text_view"
             android:text="155900"
             app:layout_constraintStart_toEndOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/tour_name" />
+            app:layout_constraintTop_toBottomOf="@+id/of_tourname" />
 
 
         <TextView

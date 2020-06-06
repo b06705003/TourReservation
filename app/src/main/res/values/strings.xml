@@ -10,7 +10,7 @@
 
     <string name="signup_title">註冊</string>
     <string name="search_title">搜尋</string>
-    <string name="reservation_title">預約</string>
+    <string name="reservation_title">預訂</string>
     <string name="modify_title">修改</string>
     <string name="check_title">確認</string>
 
@@ -23,4 +23,16 @@
 
     <string name="same_username">此帳號已註冊過，請更改</string>
     <string name="signup_success">註冊成功</string>
+    <string name="no_tours">無開團資訊，請修改目的地或日期</string>
+
+    <string name="no_username">無此使用者，請先註冊</string>
+
+    <string name="not_enough">已超出可報名人數，請修改人數</string>
+    <string name="zero_people">須至少一人以預訂</string>
+    <string name="order_id">訂單編號</string>
+    <string name="no_such_order">查無訂單，請重新輸入</string>
+
+    <string name="adult">成人</string>
+    <string name="child">孩童</string>
+    <string name="baby">嬰兒</string>
 </resources>

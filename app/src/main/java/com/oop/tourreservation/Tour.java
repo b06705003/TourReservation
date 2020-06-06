@@ -12,6 +12,12 @@ import java.util.Date;
 
 @Entity(tableName = "tour")
 public class Tour {
+
+    private static final double ADULT_DISCOUNT = 1.0;
+    private static final double CHILD_DISCOUNT = 0.75;
+    private static final double BABY_DISCOUNT = 0.5;
+
+
     @PrimaryKey(autoGenerate = true)
     public int id;
 
@@ -36,6 +42,11 @@ public class Tour {
         this.lower_bound = lower_bound;
         this.upper_bound = upper_bound;
         this.current_amount = 0;
+    }
+
+    @Override
+    public String toString() {
+        return id + ": " + title;
     }
 
     public Tour(String title, int travel_code, String product_key, int price, String start_str, String end_str, int lower_bound, int upper_bound) {
@@ -94,5 +105,18 @@ public class Tour {
                 "2020-06-25", "2020-06-29", 10, 16));
 
         return tours;
+    }
+
+    public boolean addTourists(int num) {
+        if (current_amount + num > upper_bound) {
+            return false;
+        } else {
+            current_amount += num;
+            return true;
+        }
+    }
+
+    public int totalPrice(int adult_num, int child_num, int baby_num) {
+        return (int) (price * (adult_num*ADULT_DISCOUNT + child_num*CHILD_DISCOUNT + baby_num*BABY_DISCOUNT));
     }
 }

@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,7 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class SearchFragment extends Fragment {
+public class SearchFragment extends Fragment implements TourListAdapter.OnTourClickListener {
 
     private AppViewModel viewModel;
     private List<Tour> tours;
@@ -109,9 +111,13 @@ public class SearchFragment extends Fragment {
             }
 
             // enabling recyclerview
-            TourListAdapter adapter = new TourListAdapter(tours);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            if (tours.size() == 0) { //
+                Toast.makeText(getContext(), R.string.no_tours, Toast.LENGTH_LONG).show();
+            } else {
+                TourListAdapter adapter = new TourListAdapter(tours, this);
+                recyclerView.setAdapter(adapter);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            }
 
         });
     }
@@ -125,5 +131,21 @@ public class SearchFragment extends Fragment {
             Log.d("ERROR", "strToDate");
         }
         return date;
+    }
+
+    @Override
+    public void onTourClick(int position) {
+        // tours.get(position);
+        // Intent intent = new Intent(this, NewActivity.class);
+        // startActivity(intent);
+
+        Tour tour = tours.get(position);
+        showReservationDialog(tour);
+    }
+
+    private void showReservationDialog(Tour tour) {
+        ReservationDialogFragment fragment = ReservationDialogFragment.newInstance(tour);
+        FragmentManager manager = getParentFragmentManager();
+        fragment.show(manager, "dialog");
     }
 }

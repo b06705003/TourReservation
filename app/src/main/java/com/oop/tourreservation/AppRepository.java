@@ -45,5 +45,17 @@ public class AppRepository {
         return userDao.getAllUsers();
     }
 
+    public User getUserByUsername(String username) { return userDao.getUserByUsername(username); }
 
+    public void insertOrder(Order order) { orderDao.insertOrder(order); }
+
+    public List<Order> getAllOrders() { return orderDao.getAllOrders(); }
+
+    public void updateTour(Tour tour) { tourDao.updateTour(tour); }
+
+    public Order getOrder(int orderId) { return orderDao.getOrder(orderId); }
+
+    public User getUser(int userId) { return userDao.getUser(userId); }
+
+    public Tour getTour(int tourId) { return tourDao.getTour(tourId); }
 }

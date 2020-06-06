@@ -29,4 +29,7 @@ public class Order {
     public Order(int user_id, int tour_id, int adult_num, int child_num, int baby_num, int total_price) {
         this(0, user_id, tour_id, adult_num, child_num, baby_num, total_price);
     }
+
+    @Override
+    public String toString() { return id + ", " + user_id + ", " + tour_id; }
 }
