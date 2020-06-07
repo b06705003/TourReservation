@@ -32,4 +32,13 @@ public class Order {
 
     @Override
     public String toString() { return id + ", " + user_id + ", " + tour_id; }
+
+    public int getTotalNum() { return adult_num + child_num + baby_num; }
+
+    public void modify(int adult_num, int child_num, int baby_num, int total_price) {
+        this.adult_num = adult_num;
+        this.child_num = child_num;
+        this.baby_num = baby_num;
+        this.total_price = total_price;
+    }
 }

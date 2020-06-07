@@ -2,8 +2,10 @@ package com.oop.tourreservation;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import java.util.List;
 
@@ -18,4 +20,10 @@ public interface OrderDao {
 
     @Query("SELECT * FROM `order`")
     List<Order> getAllOrders();
+
+    @Delete
+    void deleteOrder(Order order);
+
+    @Update
+    void updateOrder(Order order);
 }

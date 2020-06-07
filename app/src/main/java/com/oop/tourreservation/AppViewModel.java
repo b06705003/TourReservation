@@ -57,4 +57,8 @@ public class AppViewModel extends AndroidViewModel {
     public User getUser(int userId) { return appRepository.getUser(userId); }
 
     public Tour getTour(int tourId) { return appRepository.getTour(tourId); }
+
+    public void deleteOrder(Order order) { appRepository.deleteOrder(order); }
+
+    public void updateOrder(Order order) { appRepository.updateOrder(order); }
 }

@@ -35,4 +35,7 @@
     <string name="adult">成人</string>
     <string name="child">孩童</string>
     <string name="baby">嬰兒</string>
+
+    <string name="cancel_order">退訂</string>
+    <string name="cancel_success">已成功取消訂單</string>
 </resources>

@@ -25,13 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/btn_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cf_et_orderid" />
+        app:layout_constraintTop_toTopOf="@+id/btn_modify" />
 
     <EditText
         android:id="@+id/cf_et_orderid"
@@ -61,4 +57,25 @@
         app:layout_constraintTop_toBottomOf="@+id/btn_check">
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/btn_modify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/modify_title"
+        app:layout_constraintEnd_toStartOf="@+id/btn_cancel"
+        app:layout_constraintStart_toEndOf="@+id/btn_check"
+        app:layout_constraintTop_toBottomOf="@+id/cf_et_orderid" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/cancel_order"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_modify" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,6 +17,11 @@ import androidx.lifecycle.ViewModelProvider;
 public class CheckFragment extends Fragment {
 
     private AppViewModel viewModel;
+    private EditText et_username;
+    private EditText et_orderid;
+    private Button btn_check;
+    private Button btn_modify;
+    private Button btn_cancel;
 
     @Nullable
     @Override
@@ -30,31 +35,66 @@ public class CheckFragment extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
 
-        EditText et_username = view.findViewById(R.id.cf_et_username);
-        EditText et_orderid = view.findViewById(R.id.cf_et_orderid);
-        Button btn_check = view.findViewById(R.id.btn_check);
+        et_username = view.findViewById(R.id.cf_et_username);
+        et_orderid = view.findViewById(R.id.cf_et_orderid);
+        btn_check = view.findViewById(R.id.btn_check);
+        btn_modify = view.findViewById(R.id.btn_modify);
+        btn_cancel = view.findViewById(R.id.btn_cancel);
 
         btn_check.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = et_username.getText().toString();
-                int orderid = Integer.parseInt(et_orderid.getText().toString());
-
-                try {
-                    User user = viewModel.getUserByUsername(username);
-                    Order order = viewModel.getOrder(orderid);
-
-                    if (user.id != order.user_id)
-                        throw new Exception();
-
+                Order order = verifyOrder();
+                if (order != null) {
                     FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
                     transaction.replace(R.id.order_frame, new OrderFragment(order));
                     transaction.commit();
-
-                } catch (Exception e) {
-                    Toast.makeText(getContext(), R.string.no_such_order, Toast.LENGTH_LONG).show();
                 }
             }
         });
+
+        btn_modify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Order order = verifyOrder();
+                if (order != null) {
+                    FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+                    transaction.replace(R.id.order_frame, new ModifyFragment(order));
+                    transaction.commit();
+                }
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Order order = verifyOrder();
+                if (order != null) {
+                    viewModel.deleteOrder(order);
+                    Toast.makeText(getContext(), R.string.cancel_success, Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private Order verifyOrder() {
+        String username = et_username.getText().toString();
+        int orderid = 0;
+        try {
+            orderid = Integer.parseInt(et_orderid.getText().toString());
+        } catch (Exception e) {
+            Toast.makeText(getContext(), R.string.no_such_order, Toast.LENGTH_LONG).show();
+            return null;
+        }
+        User user = viewModel.getUserByUsername(username);
+        Order order = viewModel.getOrder(orderid);
+        try {
+            if (user.id != order.user_id)
+                throw new Exception();
+        } catch (Exception e) {
+            Toast.makeText(getContext(), R.string.no_such_order, Toast.LENGTH_LONG).show();
+            return null;
+        }
+        return order;
     }
 }

@@ -55,7 +55,7 @@ public class ReservationDialogFragment extends DialogFragment {
         NumberPicker adult_picker = view.findViewById(R.id.adult_picker);
         NumberPicker child_picker = view.findViewById(R.id.child_picker);
         NumberPicker baby_picker = view.findViewById(R.id.baby_picker);
-        Button reservation_btn = view.findViewById(R.id.reservation_btn);
+        Button reservation_btn = view.findViewById(R.id.modify_btn);
 
         adult_picker.setMinValue(0);
         adult_picker.setMaxValue(10);
@@ -76,25 +76,25 @@ public class ReservationDialogFragment extends DialogFragment {
                 int totalPrice = mTour.totalPrice(adult_num, child_num, baby_num);
                 int totalNum = adult_num + child_num + baby_num;
 
-                boolean isEnough = mTour.addTourists(totalNum);
-
-                if (totalNum <= 0) {
+                if (totalNum <= 0) { // at least one tourist to make an order
                     Toast.makeText(getContext(), R.string.zero_people, Toast.LENGTH_LONG).show();
                 }
-                else if (isEnough) {
-                    viewModel.updateTour(mTour);
+                else {
                     User user = viewModel.getUserByUsername(username);
                     Order order = null;
                     try {
                         order = new Order(user.id, mTour.id, adult_num, child_num, baby_num, totalPrice);
-                        viewModel.insertOrder(order);
+
+                        boolean isEnough = mTour.addTourists(totalNum);
+                        if (isEnough) {
+                            viewModel.insertOrder(order);
+                            viewModel.updateTour(mTour);
+                        } else {
+                            Toast.makeText(getContext(), R.string.not_enough, Toast.LENGTH_LONG).show();
+                        }
                     } catch (Exception e) {
                         Toast.makeText(getContext(), R.string.no_username, Toast.LENGTH_LONG).show();
                     }
-
-                }
-                else {
-                    Toast.makeText(getContext(), R.string.not_enough, Toast.LENGTH_LONG).show();
                 }
 
                 for (Order anOrder: viewModel.getAllOrders()) {

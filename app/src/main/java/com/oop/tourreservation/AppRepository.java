@@ -58,4 +58,8 @@ public class AppRepository {
     public User getUser(int userId) { return userDao.getUser(userId); }
 
     public Tour getTour(int tourId) { return tourDao.getTour(tourId); }
+
+    public void deleteOrder(Order order) { orderDao.deleteOrder(order); }
+
+    public void updateOrder(Order order) { orderDao.updateOrder(order);}
 }
