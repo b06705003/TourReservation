@@ -13,14 +13,6 @@
         android:icon="@drawable/search_icon"/>
 
     <item
-        android:id="@+id/page_reservation"
-        android:enabled="true"
-        android:title="@string/reservation_title"
-        android:icon="@drawable/reservation_icon"/>
-
-
-
-    <item
         android:id="@+id/page_check"
         android:enabled="true"
         android:title="@string/check_title"

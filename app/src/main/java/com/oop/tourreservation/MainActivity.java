@@ -45,9 +45,9 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.page_search:
                                 fragment = new SearchFragment();
                                 break;
-                            case R.id.page_reservation:
-                                fragment = new ReservationFragment();
-                                break;
+                            //case R.id.page_reservation:
+                              //  fragment = new ReservationFragment();
+                              //  break;
                             //case R.id.page_modify:
                             //    fragment = new ModifyFragment();
                              //   break;
