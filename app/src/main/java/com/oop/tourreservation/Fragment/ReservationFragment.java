@@ -1,4 +1,6 @@
-package com.oop.tourreservation;
+package com.oop.tourreservation.Fragment;
+
+import com.oop.tourreservation.R;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

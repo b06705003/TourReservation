@@ -1,4 +1,10 @@
-package com.oop.tourreservation;
+package com.oop.tourreservation.Fragment;
+
+import com.oop.tourreservation.AppViewModel;
+import com.oop.tourreservation.Entity.*;
+//import com.oop.tourreservation.ReservationDialogFragment;
+import com.oop.tourreservation.R;
+import com.oop.tourreservation.TourListAdapter;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;

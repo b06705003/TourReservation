@@ -1,5 +1,8 @@
 package com.oop.tourreservation;
 
+import com.oop.tourreservation.Dao.*;
+import com.oop.tourreservation.Entity.*;
+
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;

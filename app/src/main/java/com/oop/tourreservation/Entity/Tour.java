@@ -1,4 +1,4 @@
-package com.oop.tourreservation;
+package com.oop.tourreservation.Entity;
 
 import android.util.Log;
 

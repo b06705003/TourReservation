@@ -1,4 +1,8 @@
-package com.oop.tourreservation;
+package com.oop.tourreservation.Fragment;
+
+import com.oop.tourreservation.AppViewModel;
+import com.oop.tourreservation.Entity.*;
+import com.oop.tourreservation.R;
 
 import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;

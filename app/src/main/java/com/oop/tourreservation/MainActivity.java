@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.oop.tourreservation.Fragment.CheckFragment;
+import com.oop.tourreservation.Fragment.SearchFragment;
+import com.oop.tourreservation.Fragment.SignupFragment;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

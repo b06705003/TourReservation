@@ -2,6 +2,9 @@ package com.oop.tourreservation;
 
 import android.app.Application;
 
+import com.oop.tourreservation.Dao.*;
+import com.oop.tourreservation.Entity.*;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -52,7 +55,7 @@ public class AppViewModel extends AndroidViewModel {
 
     public List<Order> getAllOrders() { return appRepository.getAllOrders(); }
 
-    void updateTour(Tour tour) { appRepository.updateTour(tour); }
+    public void updateTour(Tour tour) { appRepository.updateTour(tour); }
 
     public User getUser(int userId) { return appRepository.getUser(userId); }
 

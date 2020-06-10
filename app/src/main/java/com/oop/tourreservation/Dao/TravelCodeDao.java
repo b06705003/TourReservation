@@ -1,8 +1,10 @@
-package com.oop.tourreservation;
+package com.oop.tourreservation.Dao;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+
+import com.oop.tourreservation.Entity.TravelCode;
 
 import java.util.List;
 

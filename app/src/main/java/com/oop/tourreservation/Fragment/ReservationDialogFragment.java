@@ -1,4 +1,8 @@
-package com.oop.tourreservation;
+package com.oop.tourreservation.Fragment;
+
+import com.oop.tourreservation.AppViewModel;
+import com.oop.tourreservation.Entity.*;
+import com.oop.tourreservation.R;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -89,6 +93,7 @@ public class ReservationDialogFragment extends DialogFragment {
                         if (isEnough) {
                             viewModel.insertOrder(order);
                             viewModel.updateTour(mTour);
+
                         } else {
                             Toast.makeText(getContext(), R.string.not_enough, Toast.LENGTH_LONG).show();
                         }

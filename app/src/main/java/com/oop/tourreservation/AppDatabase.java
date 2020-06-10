@@ -1,5 +1,7 @@
 package com.oop.tourreservation;
 
+import com.oop.tourreservation.Dao.*;
+import com.oop.tourreservation.Entity.*;
 import android.content.Context;
 
 import androidx.annotation.NonNull;

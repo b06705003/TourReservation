@@ -1,10 +1,12 @@
-package com.oop.tourreservation;
+package com.oop.tourreservation.Dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.oop.tourreservation.Entity.Tour;
 
 import java.util.Date;
 import java.util.List;
