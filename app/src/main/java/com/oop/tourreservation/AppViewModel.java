@@ -25,8 +25,8 @@ public class AppViewModel extends AndroidViewModel {
     }
 
     // 1st function: search available tours by code and date
-    public List<Tour> getToursByCodeAndDate(int code, Date from, Date to, String sort_method) {
-        searchedTours = appRepository.getToursByCodeAndDate(code, from, to, sort_method);
+    public List<Tour> getToursByCodeAndDate(int code, Date from, Date to) {
+        searchedTours = appRepository.getToursByCodeAndDate(code, from, to);
         return searchedTours;
     }
 

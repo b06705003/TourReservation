@@ -27,8 +27,8 @@ public class AppRepository {
         userDao = db.userDao();
     }
 
-    public List<Tour> getToursByCodeAndDate(int code, Date from, Date to, String sort_method) {
-        searchedTours = tourDao.getToursByCodeAndDate(code, from, to, sort_method);
+    public List<Tour> getToursByCodeAndDate(int code, Date from, Date to) {
+        searchedTours = tourDao.getToursByCodeAndDate(code, from, to);
         return searchedTours;
     }
 

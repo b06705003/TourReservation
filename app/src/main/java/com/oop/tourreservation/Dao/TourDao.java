@@ -17,8 +17,8 @@ public interface TourDao {
     @Insert
     void insertTour(Tour tour);
 
-    @Query("SELECT * FROM tour WHERE travel_code = :code AND start_date BETWEEN :from AND :to ORDER BY :sortMethod")
-    List<Tour> getToursByCodeAndDate(int code, Date from, Date to, String sortMethod);
+    @Query("SELECT * FROM tour WHERE travel_code = :code AND start_date BETWEEN :from AND :to ORDER BY price ASC")
+    List<Tour> getToursByCodeAndDate(int code, Date from, Date to);
 
     @Update
     void updateTour(Tour tour);

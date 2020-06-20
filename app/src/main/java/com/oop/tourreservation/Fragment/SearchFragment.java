@@ -123,7 +123,8 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
                     from = now;
                 }
                 if(to.compareTo(now) >= 0){
-                    List<Tour> aList = viewModel.getToursByCodeAndDate(code, from, to, "price");
+                    String sort = "price";
+                    List<Tour> aList = viewModel.getToursByCodeAndDate(code, from, to);
                     tours.addAll(aList);
                     Log.d(aList.toString(), "MainActivity:90");
                 }
