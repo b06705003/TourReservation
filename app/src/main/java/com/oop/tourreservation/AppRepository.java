@@ -50,7 +50,7 @@ public class AppRepository {
 
     public User getUserByUsername(String username) { return userDao.getUserByUsername(username); }
 
-    public void insertOrder(Order order) { orderDao.insertOrder(order); }
+    public long insertOrder(Order order) { return orderDao.insertOrder(order); }
 
     public List<Order> getAllOrders() { return orderDao.getAllOrders(); }
 

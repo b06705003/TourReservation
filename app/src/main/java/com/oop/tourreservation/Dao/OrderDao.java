@@ -15,7 +15,7 @@ import java.util.List;
 public interface OrderDao {
 
     @Insert
-    void insertOrder(Order order);
+    Long insertOrder(Order order);
 
     @Query("SELECT * FROM `order` WHERE id = :orderId LIMIT 1")
     Order getOrder(int orderId);

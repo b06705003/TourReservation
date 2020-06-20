@@ -1,8 +1,12 @@
 package com.oop.tourreservation;
 
+
 import com.oop.tourreservation.Dao.*;
 import com.oop.tourreservation.Entity.*;
 import android.content.Context;
+import android.content.res.AssetManager;
+import android.net.ParseException;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.room.Database;
@@ -11,6 +15,33 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import org.json.simple.*;
+import org.json.simple.parser.*;
+import java.sql.SQLException;
+
+import java.sql.*;
+import java.io.*;
+import org.json.simple.*;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Iterator;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -23,20 +54,81 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract UserDao userDao();
     public abstract TravelCodeDao travelCodeDao();
 
+    public static JSONArray a; // for
+    public static JSONArray b; //
+    public static String title;
+    public static String travel_code;
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+
+
 
     static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            AppDatabase.class, "app_database")
+                            AppDatabase.class, "09")
                             .allowMainThreadQueries()
                             .addCallback(callback)
                             .build();
                 }
+            }
+        }
+       /*read data to SQLite*/
+        /* change json to string to JSONArray*/
+        if (INSTANCE != null) {
+            TravelCode code;
+            Tour tour;
+
+            String fileName = "travel_code.json";
+            StringBuilder stringBuilder = new StringBuilder();
+            AssetManager assetManager = context.getAssets();
+
+            try {
+                JSONParser parser = new JSONParser();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(assetManager.open(fileName), "utf-8"));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                String get_all = stringBuilder.toString();
+                a = new JSONArray(get_all);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            fileName = "trip_data_all_1.json";
+            stringBuilder = new StringBuilder();
+            assetManager = context.getAssets();
+            try {
+                JSONParser parser = new JSONParser();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(assetManager.open(fileName), "utf-8"));
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    stringBuilder.append(line);
+                }
+                String get_all = stringBuilder.toString();
+                b = new JSONArray(get_all);
+
+                // since it will be something wrong when use "title" and "travel_code" as key directly
+                // get key from methods keys() and store at title and travel_code
+
+                Iterator keys = b.getJSONObject(0).keys();
+                title = (String)keys.next();
+                travel_code = (String) keys.next();
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
         return INSTANCE;
@@ -47,67 +139,62 @@ public abstract class AppDatabase extends RoomDatabase {
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
 
+            // Method is only called when the database is first generated
+            // read the data into database
             databaseWriteExecutor.execute(() -> {
                 TourDao tourDao = INSTANCE.tourDao();
                 TravelCodeDao codeDao = INSTANCE.travelCodeDao();
 
-                TravelCode code = new TravelCode(100, "北海道．札幌．小樽．函館．旭川");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(101, "關西．大阪．京都．神戶．奈良");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(391, "東京．箱根．輕井澤．伊豆．茨城");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(395, "東北．青森．仙台．山形．花卷．新潟");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(49, "北陸．名古屋．小松．富山．立山黑部");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(401, "四國．中國．高松．廣島．岡山");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(41, "九州．福岡．宮崎．鹿兒島．佐賀");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(80, "琉球．沖繩．石垣島");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(98, "首爾．清州");
-                codeDao.insertTravelCode(code);
-                code = new TravelCode(342, "四國．中國．高松．廣島．岡山");
-                codeDao.insertTravelCode(code);
+                TravelCode code;
+                Tour tour;
+                int a_id = 0;
+                String a_travel_code = "";
 
-                Tour tour = new Tour("馬達加斯加 猴麵包樹 夢幻生態天堂10天", 100, "VDR0000007686", 155900,
-                        "2020-03-12", "2020-03-21", 16, 16);
-                tourDao.insertTour(tour);
-                tour = new Tour("馬達加斯加 猴麵包樹 夢幻生態天堂10天", 100, "VDR0000007686", 148900,
-                        "2020-09-03", "2020-09-12", 16, 16);
-                tourDao.insertTour(tour);
-                tour = new Tour("【波蘭、波羅的海三小國、俄羅斯】精彩12 日", 101, "VDR0000001255", 59900,
-                        "2020-03-19", "2020-03-30", 31, 31);
-                tourDao.insertTour(tour);
-                tour = new Tour("【波蘭、波羅的海三小國、俄羅斯】精彩12 日", 101, "VDR0000001255", 79900,
-                        "2020-09-03", "2020-09-14", 31, 31);
-                tourDao.insertTour(tour);
-                tour = new Tour("[春櫻紛飛遊釜慶]世界文化遺產~佛國寺、CNN評選賞櫻推薦~余佐川羅曼史橋+慶和火車站、甘川洞彩繪壁畫村、BIFF廣場+南浦洞購物樂五日<含稅>", 342, "VDR0000007614", 12700,
-                        "2020-03-12", "2020-03-16", 16, 20);
-                tourDao.insertTour(tour);
-                tour = new Tour("揪愛玩無購物#世紀傳奇～金邊風情、吳哥奇景、舒壓SPA、華麗自助餐五日(含稅簽、無購物站)", 391, "VDR0000001838", 24800,
-                        "2020-03-12", "2020-03-16", 16, 18);
-                tourDao.insertTour(tour);
-                tour = new Tour("特選金邊吳哥～一次遊雙城、入住精選飯店、市場低價(含稅)", 391, "VDR0000001846", 16900,
-                        "2020-03-12", "2020-03-16", 15, 16);
-                tourDao.insertTour(tour);
-                tour = new Tour("特選金邊吳哥～一次遊雙城、入住精選飯店、市場低價(含稅)", 391, "VDR0000001846", 16900,
-                        "2020-03-13", "2020-03-17", 15, 16);
-                tourDao.insertTour(tour);
-                tour = new Tour("【國航假期】東歐純情三國+波蘭8日", 395, "VDR0000001842", 39600,
-                        "2020-03-12", "2020-03-19", 25, 35);
-                tourDao.insertTour(tour);
-                tour = new Tour("【醉愛歐洲波波8日】~波蘭.波羅地海三小國 愛沙尼亞 拉脫維亞 立陶宛", 395, "VDR0000001843", 39600,
-                        "2020-03-12", "2020-03-19", 25, 25);
-                tourDao.insertTour(tour);
-                tour = new Tour("【10人成行】就愛釜慶邱. 愛來水族館. 伽倻王國彩繪秀+星光庭院.甘川洞文化村五日", 342, "VDR0000001839", 23900,
-                        "2020-06-25", "2020-06-29", 10, 16);
-                tourDao.insertTour(tour);
+                try{
+                    for (int i = 0; i < a.length(); i++) {
+                        JSONObject travel_code = a.getJSONObject(i);
+                        a_id = Integer.valueOf(travel_code.getString("travel_code"));
+                        a_travel_code = travel_code.getString("travel_code_name");
 
+                        // create new travel_code and put into room database
+                        code = new TravelCode(a_id, a_travel_code);
+                        codeDao.insertTravelCode(code);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                String b_title = "";
+                int b_travel_code = 0;
+                String b_product_key = "";
+                int b_price = 0;
+                String b_start_str = "";
+                String b_end_str = "";
+                int b_lower_bound = 0;
+                int b_upper_bound = 0;
+
+                try{
+                    for (int i = 0; i < b.length(); i++) {
+                        JSONObject travel = b.getJSONObject(i);
+
+                        b_title = travel.getString(title);
+                        b_travel_code = Integer.valueOf(travel.getString(travel_code));
+                        b_product_key = travel.getString("product_key");
+                        b_price = Integer.valueOf(travel.getString("price"));
+                        b_start_str = travel.getString("start_date");
+                        b_end_str = travel.getString("end_date");
+                        b_lower_bound = Integer.valueOf(travel.getString("lower_bound"));
+                        b_upper_bound = Integer.valueOf(travel.getString("upper_bound"));
+
+                        // create new tour and put into room database
+                        tour = new Tour(b_title, b_travel_code, b_product_key, b_price, b_start_str, b_end_str ,b_lower_bound, b_upper_bound);
+                        tourDao.insertTour(tour);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Log.i("1111", "data_input_finish");
             });
         }
-
     };
 }

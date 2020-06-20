@@ -1,5 +1,7 @@
 package com.oop.tourreservation.Entity;
 
+import android.util.Log;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

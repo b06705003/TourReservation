@@ -51,7 +51,7 @@ public class AppViewModel extends AndroidViewModel {
 
     public User getUserByUsername(String username) { return appRepository.getUserByUsername(username); }
 
-    public void insertOrder(Order order) { appRepository.insertOrder(order); }
+    public long insertOrder(Order order) { return appRepository.insertOrder(order); }
 
     public List<Order> getAllOrders() { return appRepository.getAllOrders(); }
 

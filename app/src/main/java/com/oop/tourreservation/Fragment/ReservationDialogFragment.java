@@ -91,9 +91,11 @@ public class ReservationDialogFragment extends DialogFragment {
 
                         boolean isEnough = mTour.addTourists(totalNum);
                         if (isEnough) {
-                            viewModel.insertOrder(order);
+                            long order_id = viewModel.insertOrder(order);
                             viewModel.updateTour(mTour);
-
+                            Toast.makeText(getContext(), R.string.successful_order , Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "訂單編號：" + String.valueOf(order_id) + ", 預定人數" +  String.valueOf(order.getTotalNum())+", 總價格：" + String.valueOf(order.total_price), Toast.LENGTH_LONG).show();
+                           // Toast.makeText(getContext(), "總價格：" + String.valueOf(order.total_price), Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getContext(), R.string.not_enough, Toast.LENGTH_LONG).show();
                         }

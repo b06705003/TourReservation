@@ -41,4 +41,6 @@ public class Order {
         this.baby_num = baby_num;
         this.total_price = total_price;
     }
+    public String getID() { return "訂單標號："+ id + ", 使用者：" + user_id + ", 行程標號" + tour_id; }
+
 }

@@ -1,5 +1,6 @@
 package com.oop.tourreservation.Fragment;
 
+import java.text.SimpleDateFormat;
 import com.oop.tourreservation.AppViewModel;
 import com.oop.tourreservation.Entity.*;
 //import com.oop.tourreservation.ReservationDialogFragment;
@@ -111,9 +112,26 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
             for (Integer code: travelCodes) {
                 Date from = strToDate(et_from.getText().toString());
                 Date to = strToDate(et_to.getText().toString());
-                List<Tour> aList = viewModel.getToursByCodeAndDate(code, from, to, "price");
-                tours.addAll(aList);
-                Log.d(aList.toString(), "MainActivity:90");
+                ///////////////////////////////////////////////////////
+//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//                Date curDate = new Date(System.currentTimeMillis()) ; // 獲取當前時間
+//                String str = formatter.format(curDate);
+                SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                String date = sDateFormat.format(new java.util.Date());
+                Date now = strToDate(date);
+                if(from.compareTo(now) < 0){
+                    from = now;
+                }
+                if(to.compareTo(now) >= 0){
+                    List<Tour> aList = viewModel.getToursByCodeAndDate(code, from, to, "price");
+                    tours.addAll(aList);
+                    Log.d(aList.toString(), "MainActivity:90");
+                }
+
+                //////////////////////////////////////////////////////
+//                List<Tour> aList = viewModel.getToursByCodeAndDate(code, from, to, "price");
+//                tours.addAll(aList);
+//               Log.d(aList.toString(), "MainActivity:90");
             }
 
             // enabling recyclerview

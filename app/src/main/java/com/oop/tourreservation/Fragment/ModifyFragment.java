@@ -5,6 +5,7 @@ import com.oop.tourreservation.Entity.*;
 import com.oop.tourreservation.R;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ModifyFragment extends Fragment {
 
@@ -72,13 +77,27 @@ public class ModifyFragment extends Fragment {
                 }
                 else { // totalNum > 0
                     Tour tour = viewModel.getTour(order.tour_id);
+                    Date start = tour.start_date;
+
+                    SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    String date = sDateFormat.format(new java.util.Date());
+                    Date now = strToDate(date);
+
+
+
                     int diff = totalNum - (order.getTotalNum());
 
-                    if (tour.addTourists(diff)) {
+                    if(now.compareTo(start) >= 0){
+                        Toast.makeText(getContext(), R.string.fail_modify, Toast.LENGTH_SHORT).show();
+                    }
+                    else if (tour.addTourists(diff)) {
                         order.modify(adultNum, childNum, babyNum, tour.totalPrice(adultNum, childNum, babyNum));
                         viewModel.updateOrder(order);
 
                         viewModel.updateTour(tour);
+                        Toast.makeText(getContext(), R.string.successful_modify, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "修改後人數：大人" + String.valueOf(adultNum)+ ", 小孩:" + String.valueOf(childNum) + ", 嬰兒:" + String.valueOf(babyNum) , Toast.LENGTH_LONG).show();
+
                     }
                     else { // remaining quota not enough
                         Toast.makeText(getContext(), R.string.not_enough, Toast.LENGTH_LONG).show();
@@ -87,5 +106,15 @@ public class ModifyFragment extends Fragment {
             }
         });
 
+    }
+    private Date strToDate(String str) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(str);
+        } catch (Exception e) {
+            Log.d("ERROR", "strToDate");
+        }
+        return date;
     }
 }
