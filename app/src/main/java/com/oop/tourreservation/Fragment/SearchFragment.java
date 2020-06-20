@@ -112,10 +112,10 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
             for (Integer code: travelCodes) {
                 Date from = strToDate(et_from.getText().toString());
                 Date to = strToDate(et_to.getText().toString());
-                ///////////////////////////////////////////////////////
-//                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-//                Date curDate = new Date(System.currentTimeMillis()) ; // 獲取當前時間
-//                String str = formatter.format(curDate);
+
+                // get the date now
+                // if the from date is before now, change it to now
+                // if the to date is before now, even not use getToursByCodeAndDate to search
                 SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 String date = sDateFormat.format(new java.util.Date());
                 Date now = strToDate(date);
@@ -129,10 +129,6 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
                     Log.d(aList.toString(), "MainActivity:90");
                 }
 
-                //////////////////////////////////////////////////////
-//                List<Tour> aList = viewModel.getToursByCodeAndDate(code, from, to, "price");
-//                tours.addAll(aList);
-//               Log.d(aList.toString(), "MainActivity:90");
             }
 
             // enabling recyclerview
