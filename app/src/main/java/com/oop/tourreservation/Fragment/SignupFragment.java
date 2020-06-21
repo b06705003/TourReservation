@@ -42,6 +42,7 @@ public class SignupFragment extends Fragment {
         Button signup_btn = getView().findViewById(R.id.signup_btn);
         TextView tv_info = getView().findViewById(R.id.tv_info);
 
+        // setup signup button
         signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,10 +59,6 @@ public class SignupFragment extends Fragment {
                     tv_info.setText(R.string.same_username);
                 }
 
-
-                for (User aUser: viewModel.getAllUsers()) {
-                    Log.d("onClick: ", aUser.toString());
-                }
             }
         });
     }

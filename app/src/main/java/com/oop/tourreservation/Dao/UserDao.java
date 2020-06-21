@@ -9,14 +9,14 @@ import com.oop.tourreservation.Entity.User;
 import java.util.List;
 
 @Dao
-public interface UserDao {
+public interface UserDao { // get access to User table
 
     @Insert
     void insertUser(User user);
 
     @Query("SELECT * FROM user")
     List<User> getAllUsers();
-
+    
     @Query("SELECT * FROM user WHERE username = :username LIMIT 1")
     User getUserByUsername(String username);
 

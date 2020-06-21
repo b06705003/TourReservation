@@ -46,13 +46,15 @@ public class ModifyFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class); // get access to viewModel
 
+        // get access to views
         adult_picker = view.findViewById(R.id.adult_picker);
         child_picker = view.findViewById(R.id.child_picker);
         baby_picker = view.findViewById(R.id.baby_picker);
         modify_btn = view.findViewById(R.id.modify_btn);
 
+        // set lower and upper bound for an order
         adult_picker.setMinValue(0);
         adult_picker.setMaxValue(10);
         child_picker.setMinValue(0);
@@ -64,7 +66,7 @@ public class ModifyFragment extends Fragment {
         child_picker.setValue(order.child_num);
         baby_picker.setValue(order.baby_num);
 
-        modify_btn.setOnClickListener(new View.OnClickListener() {
+        modify_btn.setOnClickListener(new View.OnClickListener() { // setup button for modifying an order
             @Override
             public void onClick(View view) {
                 int adultNum = adult_picker.getValue();
@@ -87,10 +89,10 @@ public class ModifyFragment extends Fragment {
 
                     int diff = totalNum - (order.getTotalNum());
 
-                    if(now.compareTo(start) >= 0){
+                    if(now.compareTo(start) >= 0){ // too late to modify
                         Toast.makeText(getContext(), R.string.fail_modify, Toast.LENGTH_SHORT).show();
                     }
-                    else if (tour.addTourists(diff)) {
+                    else if (tour.addTourists(diff)) { // successfull modification
                         order.modify(adultNum, childNum, babyNum, tour.totalPrice(adultNum, childNum, babyNum));
                         viewModel.updateOrder(order);
 
@@ -107,7 +109,7 @@ public class ModifyFragment extends Fragment {
         });
 
     }
-    private Date strToDate(String str) {
+    private Date strToDate(String str) { // convert from string to date
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {

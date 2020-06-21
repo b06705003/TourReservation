@@ -50,15 +50,17 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // access viewModel
         viewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
 
+        // access views
         RecyclerView recyclerView = getView().findViewById(R.id.recycler_view);
         EditText et_destination = getView().findViewById(R.id.et_destination);
         EditText et_from = getView().findViewById(R.id.et_from);
         EditText et_to = getView().findViewById(R.id.et_to);
         Button btn_search = getView().findViewById(R.id.btn_search);
 
-        // set first button
+        // setup start from date picker
         et_from.setInputType(InputType.TYPE_NULL);
         et_from.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +80,7 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
             }
         });
 
-        // set second button
+        // setup start to date picker
         et_to.setInputType(InputType.TYPE_NULL);
         et_to.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,16 +100,10 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
             }
         });
 
+        // setup button for searching
         btn_search.setOnClickListener((View v) -> {
-
-            for (Integer code: viewModel.getAllCodes()) {
-                Log.d("Test all codes", String.valueOf(code));
-            }
-
             tours = new ArrayList<>();
             List<Integer> travelCodes = viewModel.getTravelCodesByString("%" + et_destination.getText().toString() + "%");
-
-            Log.d("MainActivity", String.valueOf(travelCodes.size()));
 
             for (Integer code: travelCodes) {
                 Date from = strToDate(et_from.getText().toString());
@@ -143,6 +139,7 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
         });
     }
 
+    // convert string to date
     private Date strToDate(String str) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
@@ -156,9 +153,6 @@ public class SearchFragment extends Fragment implements TourListAdapter.OnTourCl
 
     @Override
     public void onTourClick(int position) {
-        // tours.get(position);
-        // Intent intent = new Intent(this, NewActivity.class);
-        // startActivity(intent);
 
         Tour tour = tours.get(position);
         showReservationDialog(tour);

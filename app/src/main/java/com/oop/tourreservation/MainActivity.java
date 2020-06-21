@@ -34,12 +34,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // access viewmodel
         viewModel = new ViewModelProvider(this).get(AppViewModel.class);
 
         // get access to views
 
         BottomNavigationView navigation = findViewById(R.id.bottom_navigation);
 
+        // setup navigation behavior
         BottomNavigationView.OnNavigationItemSelectedListener navigationListener =
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -47,19 +49,13 @@ public class MainActivity extends AppCompatActivity {
                         Fragment fragment = null;
 
                         switch (menuItem.getItemId()) {
-                            case R.id.page_signup:
+                            case R.id.page_signup: // go to signup fragment
                                 fragment = new SignupFragment();
                                 break;
-                            case R.id.page_search:
+                            case R.id.page_search: // go to search fragment
                                 fragment = new SearchFragment();
                                 break;
-                            //case R.id.page_reservation:
-                              //  fragment = new ReservationFragment();
-                              //  break;
-                            //case R.id.page_modify:
-                            //    fragment = new ModifyFragment();
-                             //   break;
-                            case R.id.page_check:
+                            case R.id.page_check: // go to check fragment
                                 fragment = new CheckFragment();
                                 break;
                         }
@@ -75,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void openFragment(Fragment fragment) {
+    public void openFragment(Fragment fragment) { // function for opening a given fragment
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public static String dateToString(Date date) {
+    public static String dateToString(Date date) { // convert date to string
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
     }

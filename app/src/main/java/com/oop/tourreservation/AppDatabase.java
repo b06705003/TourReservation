@@ -1,6 +1,5 @@
 package com.oop.tourreservation;
 
-
 import com.oop.tourreservation.Dao.*;
 import com.oop.tourreservation.Entity.*;
 import android.content.Context;
@@ -35,8 +34,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -64,7 +61,7 @@ public abstract class AppDatabase extends RoomDatabase {
 
 
 
-    static AppDatabase getDatabase(final Context context) {
+    static AppDatabase getDatabase(final Context context) { // get database instance
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {

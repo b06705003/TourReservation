@@ -13,6 +13,7 @@ import java.util.Date;
 @Entity(tableName = "tour")
 public class Tour {
 
+    // discount for different types of people
     private static final double ADULT_DISCOUNT = 1.0;
     private static final double CHILD_DISCOUNT = 0.75;
     private static final double BABY_DISCOUNT = 0.5;
@@ -31,6 +32,7 @@ public class Tour {
     public int upper_bound;
     public int current_amount;
 
+    // constructor for creating a Tour
     public Tour(String title, int travel_code, String product_key, int price, Date start_date, Date end_date, int lower_bound, int upper_bound) {
         this.id = 0;
         this.title = title;
@@ -48,6 +50,7 @@ public class Tour {
     public String toString() {
         return id + ": " + title + " " +  start_date + " " + end_date;
     }
+
 
     public Tour(String title, int travel_code, String product_key, int price, String start_str, String end_str, int lower_bound, int upper_bound) {
 
@@ -77,8 +80,7 @@ public class Tour {
 
     }
 
-
-
+    // check if exceeds upper_bound and add tourists if enough
     public boolean addTourists(int num) {
         if (current_amount + num > upper_bound) {
             return false;
@@ -88,6 +90,7 @@ public class Tour {
         }
     }
 
+    // calculate the total price of an order
     public int totalPrice(int adult_num, int child_num, int baby_num) {
         return (int) (price * (adult_num*ADULT_DISCOUNT + child_num*CHILD_DISCOUNT + baby_num*BABY_DISCOUNT));
     }

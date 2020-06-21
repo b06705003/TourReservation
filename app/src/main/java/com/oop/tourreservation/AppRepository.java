@@ -10,7 +10,7 @@ import androidx.lifecycle.LiveData;
 import java.util.Date;
 import java.util.List;
 
-public class AppRepository {
+public class AppRepository { // layer between database and viewmodel
 
     private OrderDao orderDao;
     private TourDao tourDao;
@@ -19,7 +19,7 @@ public class AppRepository {
 
     private List<Tour> searchedTours;
 
-    public AppRepository(Application application) {
+    public AppRepository(Application application) { // constructor
         AppDatabase db = AppDatabase.getDatabase(application);
         orderDao = db.orderDao();
         tourDao = db.tourDao();

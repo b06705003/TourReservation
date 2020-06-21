@@ -12,6 +12,7 @@ public class User {
     public String password;
     public String realName;
 
+    // constructor for user
     public User(String username, String password, String realName) {
         this.id = 0;
         this.username = username;

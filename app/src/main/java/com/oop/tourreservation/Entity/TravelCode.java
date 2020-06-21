@@ -11,6 +11,7 @@ public class TravelCode {
     public int id;
     public String area_name;
 
+    // constructor for travelCode
     public TravelCode(int id, String area_name) {
         this.id = id;
         this.area_name = area_name;

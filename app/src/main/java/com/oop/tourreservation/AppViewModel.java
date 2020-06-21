@@ -12,9 +12,9 @@ import androidx.lifecycle.LiveData;
 import java.util.Date;
 import java.util.List;
 
-public class AppViewModel extends AndroidViewModel {
+public class AppViewModel extends AndroidViewModel { // provide data for UI
 
-    private AppRepository appRepository;
+    private AppRepository appRepository; // access repository
 
     private List<Tour> searchedTours;
     private Order searchedOrder;

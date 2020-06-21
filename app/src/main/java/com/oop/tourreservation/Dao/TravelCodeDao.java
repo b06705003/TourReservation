@@ -9,11 +9,12 @@ import com.oop.tourreservation.Entity.TravelCode;
 import java.util.List;
 
 @Dao
-public interface TravelCodeDao {
+public interface TravelCodeDao { // get access to TravelCode table
 
     @Insert
     void insertTravelCode(TravelCode travelCode);
 
+    // for search function
     @Query("SELECT id FROM travel_code WHERE area_name LIKE :search_str")
     public List<Integer> getTravelCodesByString(String search_str);
 

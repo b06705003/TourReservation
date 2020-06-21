@@ -18,6 +18,7 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourVi
     private List<Tour> mTours; // cached copy of words
     private OnTourClickListener mOnTourClickListener;
 
+
     public TourListAdapter(List<Tour> tours, OnTourClickListener onTourClickListener) {
         this.mTours = tours;
         this.mOnTourClickListener = onTourClickListener;
@@ -36,6 +37,7 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourVi
         public TourViewHolder(@NonNull View itemView, OnTourClickListener onTourClickListener) {
             super(itemView);
 
+            // get access to views
             tourName = (TextView)itemView.findViewById(R.id.of_tourname);
             price = (TextView)itemView.findViewById(R.id.price);
             minPeople = (TextView)itemView.findViewById(R.id.lower_bound);

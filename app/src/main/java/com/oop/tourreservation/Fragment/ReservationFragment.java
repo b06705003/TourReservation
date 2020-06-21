@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 public class ReservationFragment extends Fragment {
     @Nullable
     @Override
+    // inflate reservationFragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.reservation_fragment, container, false);
     }

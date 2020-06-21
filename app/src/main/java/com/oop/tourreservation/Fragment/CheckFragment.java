@@ -30,22 +30,23 @@ public class CheckFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.check_fragment, container, false);
+        return inflater.inflate(R.layout.check_fragment, container, false); // inflate the layout
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class); // get access to viewModel
 
+        // get access to views
         et_username = view.findViewById(R.id.cf_et_username);
         et_orderid = view.findViewById(R.id.cf_et_orderid);
         btn_check = view.findViewById(R.id.btn_check);
         btn_modify = view.findViewById(R.id.btn_modify);
         btn_cancel = view.findViewById(R.id.btn_cancel);
 
-        btn_check.setOnClickListener(new View.OnClickListener() {
+        btn_check.setOnClickListener(new View.OnClickListener() { // setup button for checking an order
             @Override
             public void onClick(View view) {
                 Order order = verifyOrder();
@@ -57,7 +58,7 @@ public class CheckFragment extends Fragment {
             }
         });
 
-        btn_modify.setOnClickListener(new View.OnClickListener() {
+        btn_modify.setOnClickListener(new View.OnClickListener() { // setup button for modifying an order
             @Override
             public void onClick(View view) {
                 Order order = verifyOrder();
@@ -69,7 +70,7 @@ public class CheckFragment extends Fragment {
             }
         });
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        btn_cancel.setOnClickListener(new View.OnClickListener() { // setup button for canceling an order
             @Override
             public void onClick(View view) {
                 Order order = verifyOrder();
@@ -81,7 +82,7 @@ public class CheckFragment extends Fragment {
         });
     }
 
-    private Order verifyOrder() {
+    private Order verifyOrder() { // verify an order: whether exist or not
         String username = et_username.getText().toString();
         int orderid = 0;
         try {

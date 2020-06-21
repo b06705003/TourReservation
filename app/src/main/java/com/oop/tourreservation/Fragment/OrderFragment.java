@@ -33,11 +33,13 @@ public class OrderFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(AppViewModel.class); // access viewModel
 
+        // get user and tour
         User user = viewModel.getUser(order.user_id);
         Tour tour = viewModel.getTour(order.tour_id);
 
+        // get info from user and tour
         String tourName = tour.title;
         String username = "帳號: " + user.username;
         String orderId = "訂單編號: " + order.id;
@@ -47,6 +49,7 @@ public class OrderFragment extends Fragment {
         String baby = "嬰兒: " + order.baby_num;
         String price = "總價: " + order.total_price;
 
+        // access views
         TextView tv_tourName = view.findViewById(R.id.of_tourname);
         TextView tv_username = view.findViewById(R.id.of_username);
         TextView tv_orderId = view.findViewById(R.id.of_orderid);
@@ -56,6 +59,7 @@ public class OrderFragment extends Fragment {
         TextView tv_baby = view.findViewById(R.id.of_baby);
         TextView tv_price = view.findViewById(R.id.of_price);
 
+        // set views using info
         tv_tourName.setText(tourName);
         tv_username.setText(username);
         tv_orderId.setText(orderId);

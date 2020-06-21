@@ -12,7 +12,7 @@ import com.oop.tourreservation.Entity.Order;
 import java.util.List;
 
 @Dao
-public interface OrderDao {
+public interface OrderDao { // get access to Order table
 
     @Insert
     Long insertOrder(Order order);

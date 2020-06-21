@@ -26,6 +26,7 @@ public class Order {
         this.total_price = total_price;
     }
 
+    // constructor when creating an order
     public Order(int user_id, int tour_id, int adult_num, int child_num, int baby_num, int total_price) {
         this(0, user_id, tour_id, adult_num, child_num, baby_num, total_price);
     }
@@ -33,14 +34,18 @@ public class Order {
     @Override
     public String toString() { return id + ", " + user_id + ", " + tour_id; }
 
+    // get total # of people in this order
     public int getTotalNum() { return adult_num + child_num + baby_num; }
 
+    // for user to modify his or her order
     public void modify(int adult_num, int child_num, int baby_num, int total_price) {
         this.adult_num = adult_num;
         this.child_num = child_num;
         this.baby_num = baby_num;
         this.total_price = total_price;
     }
+
+    // to notify user of his or her order info
     public String getID() { return "訂單標號："+ id + ", 使用者：" + user_id + ", 行程標號" + tour_id; }
 
 }
