@@ -7,10 +7,18 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.oop.tourreservation.Fragment.CheckFragment;
+import com.oop.tourreservation.Fragment.SearchFragment;
+import com.oop.tourreservation.Fragment.SignupFragment;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -78,4 +86,7 @@ public class MainActivity extends AppCompatActivity {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(date);
     }
+
+
+
 }

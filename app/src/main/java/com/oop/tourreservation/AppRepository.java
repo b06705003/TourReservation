@@ -1,5 +1,8 @@
 package com.oop.tourreservation;
 
+import com.oop.tourreservation.Dao.*;
+import com.oop.tourreservation.Entity.*;
+
 import android.app.Application;
 
 import androidx.lifecycle.LiveData;
@@ -24,8 +27,8 @@ public class AppRepository {
         userDao = db.userDao();
     }
 
-    public List<Tour> getToursByCodeAndDate(int code, Date from, Date to, String sort_method) {
-        searchedTours = tourDao.getToursByCodeAndDate(code, from, to, sort_method);
+    public List<Tour> getToursByCodeAndDate(int code, Date from, Date to) {
+        searchedTours = tourDao.getToursByCodeAndDate(code, from, to);
         return searchedTours;
     }
 
@@ -47,7 +50,7 @@ public class AppRepository {
 
     public User getUserByUsername(String username) { return userDao.getUserByUsername(username); }
 
-    public void insertOrder(Order order) { orderDao.insertOrder(order); }
+    public long insertOrder(Order order) { return orderDao.insertOrder(order); }
 
     public List<Order> getAllOrders() { return orderDao.getAllOrders(); }
 
